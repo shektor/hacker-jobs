@@ -15,10 +15,10 @@ var matchers = function(expect) {
   return {
     toBe: function(assertion) {
       if (expect === assertion) {
-        console.log("pass");
+        console.log("**pass**");
         return true;
       } else {
-        console.log("fail");
+        console.warn("assertion does not equal expectation");
         return false;
       }
     }

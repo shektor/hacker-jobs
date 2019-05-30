@@ -1,4 +1,4 @@
-describe("describe", function() {
+describe("#describe", function() {
   it("executes a callback function", function() {
     var executes = 0;
     var callback = function() {
@@ -9,7 +9,7 @@ describe("describe", function() {
   });
 });
 
-describe("it", function() {
+describe("#it", function() {
   it("executes a describe function", function() {
     var executes = 0;
     var describe = function() {
@@ -20,7 +20,7 @@ describe("it", function() {
   });
 });
 
-describe("expect", function() {
+describe("#expect", function() {
   it("returns an object with toBe function", function() {
     var actual = expect(true);
 
@@ -29,7 +29,7 @@ describe("expect", function() {
   });
 });
 
-describe("matchers", function() {
+describe("#matchers", function() {
   describe("toBe", function() {
     it("returns true if expect and assertion are equal", function() {
       var test = matchers(1).toBe(1);
