@@ -21,6 +21,21 @@ var matchers = function(expect) {
         console.warn("assertion does not equal expectation");
         return false;
       }
+    },
+
+    toMatchArray: function(assertion) {
+      if (assertion.length !== expect.length) {
+        console.warn("arrays are not of equal length");
+        return false;
+      }
+      for (var i = 0; i < assertion.length; i++) {
+        if (assertion[i] !== expect[i]) {
+          console.warn("array elements are not equal");
+          return false;
+        }
+      }
+      console.log("**pass**");
+      return true;
     }
   };
 };

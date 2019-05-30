@@ -40,4 +40,19 @@ describe("#matchers", function() {
       expect(test).toBe(false);
     });
   });
+
+  describe("toMatchArray", function() {
+    it("returns true if expect and assertion arrays match", function() {
+      var test = matchers([1, 2, 3]).toMatchArray([1, 2, 3]);
+      expect(test).toBe(true);
+    });
+    it("returns false if expect and assertion arrays are not equal length", function() {
+      var test = matchers([1, 2, 3]).toMatchArray([1, 2, 3, 4]);
+      expect(test).toBe(false);
+    });
+    it("returns false if expect and assertion arrays have different elements", function() {
+      var test = matchers([1, 2, 3]).toMatchArray([1, 2, 4]);
+      expect(test).toBe(false);
+    });
+  });
 });
