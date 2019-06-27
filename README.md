@@ -15,7 +15,7 @@ It is a single page web app using frontend JavaScript, CSS and HTML, served usin
 ## Running tests
 
 ```bash
-> open index.html
+> open spec/spec-runner.html
 # open developer tools console for browser
 # console log will output test results
 ```
