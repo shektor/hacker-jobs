@@ -10,5 +10,11 @@
     });
   };
 
+  JobList.prototype.getJob = function(jobQuery, callback) {
+    this._api.request(jobQuery, function(result) {
+      callback(result);
+    });
+  };
+
   exports.JobList = JobList;
 })(this);

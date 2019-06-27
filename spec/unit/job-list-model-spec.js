@@ -3,14 +3,14 @@ describe("JobList", function() {
     it("returns a list of job IDs", function() {
       var api = {
         request: function(_, callback) {
-          callback([1,2,3])
+          callback([1, 2, 3]);
         }
-      }
+      };
 
       var jobList = new JobList(api);
       jobList.getRecentJobs(function(result) {
-        expect(result).toMatchArray([1,2,3])
-      })
+        expect(result).toMatchArray([1, 2, 3]);
+      });
     });
 
     it("calls api request on jobstories.json", function() {
@@ -18,14 +18,37 @@ describe("JobList", function() {
 
       var api = {
         request: function(endPointQuery, callback) {
-          callback(endPointQuery)
+          callback(endPointQuery);
         }
-      }
+      };
 
       var jobList = new JobList(api, endPointQuery);
       jobList.getRecentJobs(function(result) {
-        expect(result).toBe(endPointQuery)
-      })
+        expect(result).toBe(endPointQuery);
+      });
+    });
+  });
+
+  describe("getJob", function() {
+    it("returns details for a job", function() {
+      var endPointQuery = "jobstories.json";
+
+      var job = {
+        by: "the_economist",
+        id: 1,
+        url: "https://economist.com"
+      };
+
+      var api = {
+        request: function(_, callback) {
+          callback(job);
+        }
+      };
+
+      var jobList = new JobList(api, endPointQuery);
+      jobList.getJob(job.id, function(result) {
+        expect(result).toBe(job);
+      });
     });
   });
 });
