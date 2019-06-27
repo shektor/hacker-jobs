@@ -30,35 +30,33 @@ describe("JobList", function() {
   });
 
   describe("getJob", function() {
-    it("returns details for a job", function() {
+    it("returns job object", function() {
       var endPointQuery = "jobstories.json";
 
-      var job = {
-        by: "the_economist",
-        id: 1,
-        url: "https://economist.com"
-      };
+      var job = { id: 1 };
+
+      function JobMock() {}
 
       var api = {
         request: function(_, callback) {
-          callback(job);
+          callback(new JobMock());
         }
       };
 
-      var jobList = new JobList(api, endPointQuery);
+      var jobList = new JobList(api, endPointQuery, JobMock);
       jobList.getJob(job.id, function(result) {
-        expect(result).toBe(job);
+        expect(result instanceof JobMock).toBe(true);
       });
     });
 
     it("calls api request with jobID query", function() {
       var endPointQuery = "jobstories.json";
 
-      var job = {
-        by: "the_economist",
-        id: 1,
-        url: "https://economist.com"
-      };
+      var job = { id: 1 };
+
+      function JobMock(jobQuery) {
+        this.jobQuery = jobQuery;
+      }
 
       var api = {
         request: function(request, callback) {
@@ -66,11 +64,11 @@ describe("JobList", function() {
         }
       };
 
-      var request = ["item/", job.id, ".json"].join("");
+      var jobQuery = ["item/", job.id, ".json"].join("");
 
-      var jobList = new JobList(api, endPointQuery);
+      var jobList = new JobList(api, endPointQuery, JobMock);
       jobList.getJob(job.id, function(result) {
-        expect(result).toBe(request);
+        expect(result.jobQuery).toBe(jobQuery);
       });
     });
   });

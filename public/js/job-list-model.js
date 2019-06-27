@@ -1,7 +1,8 @@
 (function(exports) {
-  function JobList(api, endPointQuery) {
+  function JobList(api, endPointQuery, job = Job) {
     this._api = api;
     this._endPointQuery = endPointQuery;
+    this._job = job;
   }
 
   JobList.prototype.getRecentJobs = function(callback) {
@@ -13,8 +14,10 @@
   JobList.prototype.getJob = function(jobID, callback) {
     var jobQuery = ["item/", jobID, ".json"].join("");
 
+    var self = this;
     this._api.request(jobQuery, function(result) {
-      callback(result);
+      var job = new self._job(result);
+      callback(job);
     });
   };
 
