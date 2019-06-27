@@ -10,7 +10,9 @@
     });
   };
 
-  JobList.prototype.getJob = function(jobQuery, callback) {
+  JobList.prototype.getJob = function(jobID, callback) {
+    var jobQuery = ["item/", jobID, ".json"].join("");
+
     this._api.request(jobQuery, function(result) {
       callback(result);
     });

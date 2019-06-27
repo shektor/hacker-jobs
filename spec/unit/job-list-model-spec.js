@@ -50,5 +50,28 @@ describe("JobList", function() {
         expect(result).toBe(job);
       });
     });
+
+    it("calls api request with jobID query", function() {
+      var endPointQuery = "jobstories.json";
+
+      var job = {
+        by: "the_economist",
+        id: 1,
+        url: "https://economist.com"
+      };
+
+      var api = {
+        request: function(request, callback) {
+          callback(request);
+        }
+      };
+
+      var request = ["item/", job.id, ".json"].join("");
+
+      var jobList = new JobList(api, endPointQuery);
+      jobList.getJob(job.id, function(result) {
+        expect(result).toBe(request);
+      });
+    });
   });
 });
