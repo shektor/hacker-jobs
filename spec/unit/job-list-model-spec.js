@@ -49,6 +49,27 @@ describe("JobList", function() {
       });
     });
 
+    it("job constructor is passed API result", function() {
+      var endPointQuery = "jobstories.json";
+
+      var job = { id: 1 };
+
+      function JobMock(result) {
+        this.id = result.id;
+      }
+
+      var api = {
+        request: function(_, callback) {
+          callback(job);
+        }
+      };
+
+      var jobList = new JobList(api, endPointQuery, JobMock);
+      jobList.getJob(job.id, function(result) {
+        expect(result.id).toBe(job.id);
+      });
+    });
+
     it("calls api request with jobID query", function() {
       var endPointQuery = "jobstories.json";
 
