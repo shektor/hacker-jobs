@@ -17,15 +17,13 @@ describe("JobList", function() {
       var endPointQuery = "jobstories.json";
 
       var api = {
-        request: function(endPointQuery, callback) {
-          callback(endPointQuery);
+        request: function(url, _) {
+          expect(url).toBe(endPointQuery);
         }
       };
 
       var jobList = new JobList(api, endPointQuery);
-      jobList.getRecentJobs(function(result) {
-        expect(result).toBe(endPointQuery);
-      });
+      jobList.getRecentJobs();
     });
   });
 
