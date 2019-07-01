@@ -37,7 +37,7 @@ describe("JobList", function() {
 
       var api = {
         request: function(_, callback) {
-          callback(new JobMock());
+          callback(job);
         }
       };
 
@@ -78,17 +78,15 @@ describe("JobList", function() {
       }
 
       var api = {
-        request: function(request, callback) {
-          callback(request);
+        request: function(url, callback) {
+          expect(url).toBe(jobQuery);
         }
       };
 
-      var jobQuery = ["item/", job.id, ".json"].join("");
+      var jobQuery = "item/1.json";
 
       var jobList = new JobList(api, endPointQuery, JobMock);
-      jobList.getJob(job.id, function(result) {
-        expect(result.jobQuery).toBe(jobQuery);
-      });
+      jobList.getJob(1, function() {});
     });
   });
 });
